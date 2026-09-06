@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>RIA AI Calling Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                R
+            </div>
+
+            <div>
+
+                <h2>RIA</h2>
+
+                <span>AI Calling Assistant</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="menu">
+
+            <div class="menu-item active">
+                Dashboard
+            </div>
+
+            <div class="menu-item">
+                Calls
+            </div>
+
+            <div class="menu-item">
+                Conversations
+            </div>
+
+            <div class="menu-item">
+                Settings
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <span class="online-dot"></span>
+
+            System Online
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="main">
+
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div>
+
+                <h1>RIA Dashboard</h1>
+
+                <p>
+                    AI-powered conversational calling system
+                </p>
+
+            </div>
+
+
+            <div class="header-status">
+
+                <span class="online-dot"></span>
+
+                <span id="systemStatus">
+                    Ready
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================
+             TOP CARDS
+        ====================================== -->
+
+        <section class="cards">
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📞
+                </div>
+
+                <div>
+
+                    <p>Status</p>
+
+                    <h2 id="callStatus">
+                        Ready
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🎙️
+                </div>
+
+                <div>
+
+                    <p>Voice Engine</p>
+
+                    <h2>Whisper</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <p>AI Model</p>
+
+                    <h2>GPT-5.1</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🔊
+                </div>
+
+                <div>
+
+                    <p>Speech</p>
+
+                    <h2>GPT TTS</h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             CALL CONTROL
+        ====================================== -->
+
+        <section class="call-panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>Outbound Call</h2>
+
+                    <p>
+                        Start a conversation with the customer
+                    </p>
+
+                </div>
+
+
+                <div class="ria-status">
+
+                    <span class="pulse"></span>
+
+                    RIA Ready
+
+                </div>
+
+            </div>
+
+
+            <div class="call-body">
+
+
+                <div class="phone-display">
+
+                    <span>Customer</span>
+
+                    <strong id="phoneNumber">
+                        +91 XXXXX XXXXX
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="callButton"
+                    class="call-button"
+                    onclick="makeCall()">
+
+                    📞 Start Call
+
+                </button>
+
+
+                <button
+                    class="reset-button"
+                    onclick="resetDashboard()">
+
+                    Reset
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             CONVERSATION
+        ====================================== -->
+
+        <section class="conversation">
+
+
+            <div class="conversation-card">
+
+
+                <div class="conversation-header">
+
+                    <h2>Customer</h2>
+
+                    <span>
+                        🎙️ Speech
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="transcript"
+                    class="message">
+
+                    Waiting for customer
+                    conversation...
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="conversation-card">
+
+
+                <div class="conversation-header">
+
+                    <h2>RIA</h2>
+
+                    <span>
+                        🤖 AI
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="riaResponse"
+                    class="message ria-message">
+
+                    RIA response will
+                    appear here...
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             AUDIO
+        ====================================== -->
+
+        <section class="audio-panel">
+
+            <div>
+
+                <h2>RIA Voice Response</h2>
+
+                <p>
+                    Listen to the latest generated response
+                </p>
+
+            </div>
+
+
+            <audio
+                id="audioPlayer"
+                controls>
+
+                <source
+                    src="/static/reply.mp3"
+                    type="audio/mpeg">
+
+            </audio>
+
+        </section>
+
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer>
+
+            RIA AI Calling System
+
+            <span>
+                Flask • Twilio • Whisper • GPT • TTS
+            </span>
+
+        </footer>
+
+
+    </main>
+
+</div>
+
+
+
+<script>
+
+
+// ============================================
+// MAKE CALL
+// ============================================
+
+function makeCall() {
+
+
+    const button =
+        document.getElementById(
+            "callButton"
+        );
+
+
+    button.disabled = true;
+
+    button.innerHTML =
+        "📞 Calling...";
+
+
+    fetch("/make_call")
+
+        .then(response =>
+            response.json()
+        )
+
+        .then(data => {
+
+
+            if (data.success) {
+
+                alert(
+                    "Call initiated successfully!\n\n" +
+                    "Call SID: " +
+                    data.call_sid
+                );
+
+            }
+
+            else {
+
+                alert(
+                    "Call failed:\n" +
+                    data.error
+                );
+
+            }
+
+        })
+
+        .catch(error => {
+
+            alert(
+                "Error connecting to Flask server."
+            );
+
+            console.error(error);
+
+        })
+
+        .finally(() => {
+
+            button.disabled = false;
+
+            button.innerHTML =
+                "📞 Start Call";
+
+        });
+
+}
+
+
+
+// ============================================
+// UPDATE DASHBOARD
+// ============================================
+
+function updateDashboard() {
+
+
+    fetch("/status")
+
+        .then(response =>
+            response.json()
+        )
+
+        .then(data => {
+
+
+            document.getElementById(
+                "callStatus"
+            ).innerText =
+                data.status;
+
+
+            document.getElementById(
+                "systemStatus"
+            ).innerText =
+                data.status;
+
+
+            if (data.transcript) {
+
+                document.getElementById(
+                    "transcript"
+                ).innerText =
+                    data.transcript;
+
+            }
+
+
+            if (data.response) {
+
+                document.getElementById(
+                    "riaResponse"
+                ).innerText =
+                    data.response;
+
+            }
+
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+        });
+
+}
+
+
+
+// ============================================
+// RESET
+// ============================================
+
+function resetDashboard() {
+
+
+    fetch("/reset")
+
+        .then(() => {
+
+            document.getElementById(
+                "callStatus"
+            ).innerText =
+                "Ready";
+
+
+            document.getElementById(
+                "systemStatus"
+            ).innerText =
+                "Ready";
+
+
+            document.getElementById(
+                "transcript"
+            ).innerText =
+                "Waiting for customer conversation...";
+
+
+            document.getElementById(
+                "riaResponse"
+            ).innerText =
+                "RIA response will appear here...";
+
+
+        });
+
+}
+
+
+
+// ============================================
+// AUTO REFRESH
+// ============================================
+
+setInterval(
+    updateDashboard,
+    2000
+);
+
+
+</script>
+
+
+</body>
+
+</html>
