@@ -1,580 +1,417 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<html>
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>RIA AI Calling Assistant</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static',
-          filename='style.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
 
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-
-    <!-- =========================================
+  <body>
+    <div class="container">
+      <!-- =====================================================
          SIDEBAR
-    ========================================== -->
+    ====================================================== -->
 
-    <aside class="sidebar">
-
+      <aside class="sidebar">
         <div class="logo">
+          <div class="logo-icon">R</div>
 
-            <div class="logo-icon">
-                R
-            </div>
+          <div>
+            <h2>RIA</h2>
 
-            <div>
-
-                <h2>RIA</h2>
-
-                <span>AI Calling Assistant</span>
-
-            </div>
-
+            <span> AI Calling Assistant </span>
+          </div>
         </div>
-
 
         <div class="menu">
+          <div class="menu-item active">Dashboard</div>
 
-            <div class="menu-item active">
-                Dashboard
-            </div>
+          <div class="menu-item">Calls</div>
 
-            <div class="menu-item">
-                Calls
-            </div>
+          <div class="menu-item">Conversations</div>
 
-            <div class="menu-item">
-                Conversations
-            </div>
-
-            <div class="menu-item">
-                Settings
-            </div>
-
+          <div class="menu-item">Settings</div>
         </div>
-
 
         <div class="sidebar-bottom">
+          <span class="online-dot"></span>
 
-            <span class="online-dot"></span>
-
-            System Online
-
+          System Online
         </div>
+      </aside>
 
-    </aside>
-
-
-
-    <!-- =========================================
+      <!-- =====================================================
          MAIN
-    ========================================== -->
+    ====================================================== -->
 
-    <main class="main">
-
-
-        <!-- HEADER -->
+      <main class="main">
+        <!-- =================================================
+             HEADER
+        ================================================== -->
 
         <header>
+          <div>
+            <h1>RIA Dashboard</h1>
 
-            <div>
+            <p>AI-powered conversational calling system</p>
+          </div>
 
-                <h1>RIA Dashboard</h1>
+          <div class="header-status">
+            <span class="online-dot"></span>
 
-                <p>
-                    AI-powered conversational calling system
-                </p>
-
-            </div>
-
-
-            <div class="header-status">
-
-                <span class="online-dot"></span>
-
-                <span id="systemStatus">
-                    Ready
-                </span>
-
-            </div>
-
+            <span id="systemStatus"> Ready </span>
+          </div>
         </header>
 
-
-
-        <!-- =====================================
+        <!-- =================================================
              TOP CARDS
-        ====================================== -->
+        ================================================== -->
 
         <section class="cards">
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    📞
-                </div>
-
-                <div>
-
-                    <p>Status</p>
-
-                    <h2 id="callStatus">
-                        Ready
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🎙️
-                </div>
-
-                <div>
-
-                    <p>Voice Engine</p>
-
-                    <h2>Whisper</h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🤖
-                </div>
-
-                <div>
-
-                    <p>AI Model</p>
-
-                    <h2>GPT-5.1</h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🔊
-                </div>
-
-                <div>
-
-                    <p>Speech</p>
-
-                    <h2>GPT TTS</h2>
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =====================================
-             CALL CONTROL
-        ====================================== -->
-
-        <section class="call-panel">
-
-
-            <div class="panel-header">
-
-                <div>
-
-                    <h2>Outbound Call</h2>
-
-                    <p>
-                        Start a conversation with the customer
-                    </p>
-
-                </div>
-
-
-                <div class="ria-status">
-
-                    <span class="pulse"></span>
-
-                    RIA Ready
-
-                </div>
-
-            </div>
-
-
-            <div class="call-body">
-
-
-                <div class="phone-display">
-
-                    <span>Customer</span>
-
-                    <strong id="phoneNumber">
-                        +91 XXXXX XXXXX
-                    </strong>
-
-                </div>
-
-
-                <button
-                    id="callButton"
-                    class="call-button"
-                    onclick="makeCall()">
-
-                    📞 Start Call
-
-                </button>
-
-
-                <button
-                    class="reset-button"
-                    onclick="resetDashboard()">
-
-                    Reset
-
-                </button>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =====================================
-             CONVERSATION
-        ====================================== -->
-
-        <section class="conversation">
-
-
-            <div class="conversation-card">
-
-
-                <div class="conversation-header">
-
-                    <h2>Customer</h2>
-
-                    <span>
-                        🎙️ Speech
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="transcript"
-                    class="message">
-
-                    Waiting for customer
-                    conversation...
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="conversation-card">
-
-
-                <div class="conversation-header">
-
-                    <h2>RIA</h2>
-
-                    <span>
-                        🤖 AI
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="riaResponse"
-                    class="message ria-message">
-
-                    RIA response will
-                    appear here...
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =====================================
-             AUDIO
-        ====================================== -->
-
-        <section class="audio-panel">
+          <div class="card">
+            <div class="card-icon">📞</div>
 
             <div>
+              <p>Call Status</p>
 
-                <h2>RIA Voice Response</h2>
-
-                <p>
-                    Listen to the latest generated response
-                </p>
-
+              <h2 id="callStatus">Ready</h2>
             </div>
+          </div>
 
+          <div class="card">
+            <div class="card-icon">🎙️</div>
 
-            <audio
-                id="audioPlayer"
-                controls>
+            <div>
+              <p>Voice Engine</p>
 
-                <source
-                    src="/static/reply.mp3"
-                    type="audio/mpeg">
+              <h2>Whisper</h2>
+            </div>
+          </div>
 
-            </audio>
+          <div class="card">
+            <div class="card-icon">🤖</div>
 
+            <div>
+              <p>AI Model</p>
+
+              <h2>GPT</h2>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">🔊</div>
+
+            <div>
+              <p>Speech</p>
+
+              <h2>GPT TTS</h2>
+            </div>
+          </div>
         </section>
 
+        <!-- =================================================
+             CALL CONTROL
+        ================================================== -->
 
+        <section class="call-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Outbound Call</h2>
 
-        <!-- =====================================
+              <p>Start a conversation with the customer</p>
+            </div>
+
+            <div class="ria-status">
+              <span class="pulse"></span>
+
+              RIA Ready
+            </div>
+          </div>
+
+          <div class="call-body">
+            <div class="phone-display">
+              <span> Customer </span>
+
+              <strong id="phoneNumber"> Customer Number </strong>
+            </div>
+
+            <button id="callButton" class="call-button" onclick="makeCall()">
+              📞 Start Call
+            </button>
+
+            <button class="reset-button" onclick="resetDashboard()">
+              Reset
+            </button>
+          </div>
+        </section>
+
+        <!-- =================================================
+             CONVERSATION
+        ================================================== -->
+
+        <section class="conversation">
+          <div class="conversation-card">
+            <div class="conversation-header">
+              <h2>Customer</h2>
+
+              <span> 🎙️ Speech </span>
+            </div>
+
+            <div id="transcript" class="message">
+              Waiting for customer conversation...
+            </div>
+          </div>
+
+          <div class="conversation-card">
+            <div class="conversation-header">
+              <h2>RIA</h2>
+
+              <span> 🤖 AI </span>
+            </div>
+
+            <div id="riaResponse" class="message ria-message">
+              RIA response will appear here...
+            </div>
+          </div>
+        </section>
+
+        <!-- =================================================
+             ERROR
+        ================================================== -->
+
+        <section id="errorPanel" class="error-panel" style="display: none">
+          <h3>⚠️ Error</h3>
+
+          <p id="errorMessage"></p>
+        </section>
+
+        <!-- =================================================
+             AUDIO
+        ================================================== -->
+
+        <section class="audio-panel">
+          <div>
+            <h2>RIA Voice Response</h2>
+
+            <p>Listen to the latest generated response</p>
+          </div>
+
+          <audio id="audioPlayer" controls>
+            Your browser does not support audio.
+          </audio>
+        </section>
+
+        <!-- =================================================
+             CALL INFORMATION
+        ================================================== -->
+
+        <section class="call-info">
+          <div>
+            <span> Call SID </span>
+
+            <strong id="callSid"> - </strong>
+          </div>
+
+          <div>
+            <span> Duration </span>
+
+            <strong id="duration"> - </strong>
+          </div>
+        </section>
+
+        <!-- =================================================
              FOOTER
-        ====================================== -->
+        ================================================== -->
 
         <footer>
+          RIA AI Calling System
 
-            RIA AI Calling System
-
-            <span>
-                Flask • Twilio • Whisper • GPT • TTS
-            </span>
-
+          <span> Flask • Twilio • Whisper • GPT • TTS </span>
         </footer>
+      </main>
+    </div>
 
+    <script>
+      // ============================================================
+      // MAKE CALL
+      // ============================================================
 
-    </main>
+      async function makeCall() {
+        const button = document.getElementById("callButton");
 
-</div>
+        button.disabled = true;
 
+        button.innerHTML = "📞 Calling...";
 
+        try {
+          const response = await fetch("/make_call", {
+            method: "POST",
+          });
 
-<script>
+          const data = await response.json();
 
-
-// ============================================
-// MAKE CALL
-// ============================================
-
-function makeCall() {
-
-
-    const button =
-        document.getElementById(
-            "callButton"
-        );
-
-
-    button.disabled = true;
-
-    button.innerHTML =
-        "📞 Calling...";
-
-
-    fetch("/make_call")
-
-        .then(response =>
-            response.json()
-        )
-
-        .then(data => {
-
-
-            if (data.success) {
-
-                alert(
-                    "Call initiated successfully!\n\n" +
-                    "Call SID: " +
-                    data.call_sid
-                );
-
-            }
-
-            else {
-
-                alert(
-                    "Call failed:\n" +
-                    data.error
-                );
-
-            }
-
-        })
-
-        .catch(error => {
+          if (data.success) {
+            console.log("Call initiated:", data.call_sid);
 
             alert(
-                "Error connecting to Flask server."
+              "Call initiated successfully!\n\n" + "Call SID: " + data.call_sid,
             );
+          } else {
+            alert("Call failed:\n\n" + data.error);
+          }
+        } catch (error) {
+          console.error(error);
 
-            console.error(error);
+          alert("Error connecting to Flask server.");
+        } finally {
+          button.disabled = false;
 
-        })
+          button.innerHTML = "📞 Start Call";
+        }
+      }
 
-        .finally(() => {
+      // ============================================================
+      // UPDATE DASHBOARD
+      // ============================================================
 
-            button.disabled = false;
+      async function updateDashboard() {
+        try {
+          const response = await fetch("/status", {
+            cache: "no-store",
+          });
 
-            button.innerHTML =
-                "📞 Start Call";
+          const data = await response.json();
 
-        });
+          // ----------------------------------------------------
+          // STATUS
+          // ----------------------------------------------------
 
-}
+          document.getElementById("callStatus").innerText =
+            data.status || "Ready";
 
+          document.getElementById("systemStatus").innerText =
+            data.status || "Ready";
 
+          // ----------------------------------------------------
+          // TRANSCRIPT
+          // ----------------------------------------------------
 
-// ============================================
-// UPDATE DASHBOARD
-// ============================================
+          if (data.transcript) {
+            document.getElementById("transcript").innerText = data.transcript;
+          }
 
-function updateDashboard() {
+          // ----------------------------------------------------
+          // RIA RESPONSE
+          // ----------------------------------------------------
 
+          if (data.response) {
+            document.getElementById("riaResponse").innerText = data.response;
+          }
 
-    fetch("/status")
+          // ----------------------------------------------------
+          // CALL SID
+          // ----------------------------------------------------
 
-        .then(response =>
-            response.json()
-        )
+          document.getElementById("callSid").innerText = data.call_sid || "-";
 
-        .then(data => {
+          // ----------------------------------------------------
+          // DURATION
+          // ----------------------------------------------------
 
+          document.getElementById("duration").innerText = data.duration
+            ? data.duration + " sec"
+            : "-";
 
-            document.getElementById(
-                "callStatus"
-            ).innerText =
-                data.status;
+          // ----------------------------------------------------
+          // AUDIO
+          // ----------------------------------------------------
 
+          if (data.audio_url) {
+            const audio = document.getElementById("audioPlayer");
 
-            document.getElementById(
-                "systemStatus"
-            ).innerText =
-                data.status;
+            const currentSource = audio.getAttribute("data-audio-url");
 
+            if (currentSource !== data.audio_url) {
+              audio.src = data.audio_url + "?t=" + Date.now();
 
-            if (data.transcript) {
+              audio.setAttribute("data-audio-url", data.audio_url);
 
-                document.getElementById(
-                    "transcript"
-                ).innerText =
-                    data.transcript;
-
+              audio.load();
             }
+          }
 
+          // ----------------------------------------------------
+          // ERROR
+          // ----------------------------------------------------
 
-            if (data.response) {
+          const errorPanel = document.getElementById("errorPanel");
 
-                document.getElementById(
-                    "riaResponse"
-                ).innerText =
-                    data.response;
+          const errorMessage = document.getElementById("errorMessage");
 
-            }
+          if (data.error) {
+            errorPanel.style.display = "block";
 
+            errorMessage.innerText = data.error;
+          } else {
+            errorPanel.style.display = "none";
+          }
+        } catch (error) {
+          console.error("Dashboard error:", error);
+        }
+      }
 
-        })
+      // ============================================================
+      // RESET DASHBOARD
+      // ============================================================
 
-        .catch(error => {
+      async function resetDashboard() {
+        try {
+          await fetch("/reset", {
+            method: "POST",
+          });
 
-            console.log(error);
+          document.getElementById("callStatus").innerText = "Ready";
 
-        });
+          document.getElementById("systemStatus").innerText = "Ready";
 
-}
+          document.getElementById("transcript").innerText =
+            "Waiting for customer conversation...";
 
+          document.getElementById("riaResponse").innerText =
+            "RIA response will appear here...";
 
+          document.getElementById("callSid").innerText = "-";
 
-// ============================================
-// RESET
-// ============================================
+          document.getElementById("duration").innerText = "-";
 
-function resetDashboard() {
+          document.getElementById("errorPanel").style.display = "none";
 
+          const audio = document.getElementById("audioPlayer");
 
-    fetch("/reset")
+          audio.removeAttribute("src");
 
-        .then(() => {
+          audio.load();
+        } catch (error) {
+          console.error("Reset error:", error);
+        }
+      }
 
-            document.getElementById(
-                "callStatus"
-            ).innerText =
-                "Ready";
+      // ============================================================
+      // AUTO REFRESH
+      // ============================================================
 
+      setInterval(updateDashboard, 2000);
 
-            document.getElementById(
-                "systemStatus"
-            ).innerText =
-                "Ready";
+      // Initial load
 
-
-            document.getElementById(
-                "transcript"
-            ).innerText =
-                "Waiting for customer conversation...";
-
-
-            document.getElementById(
-                "riaResponse"
-            ).innerText =
-                "RIA response will appear here...";
-
-
-        });
-
-}
-
-
-
-// ============================================
-// AUTO REFRESH
-// ============================================
-
-setInterval(
-    updateDashboard,
-    2000
-);
-
-
-</script>
-
-
-</body>
-
+      updateDashboard();
+    </script>
+  </body>
 </html>
