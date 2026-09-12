@@ -103,6 +103,17 @@ def generate_speech(text):
     return output_file
 
 
+def build_audio_url():
+    if not NGROK_URL:
+        return None
+
+    audio_file = os.path.join(BASE_DIR, "static", "reply.mp3")
+    if not os.path.exists(audio_file):
+        return None
+
+    return f"{NGROK_URL.rstrip('/')}/static/reply.mp3"
+
+
 # ==================================================
 # NGROK HEADER
 # ==================================================
@@ -292,7 +303,7 @@ def recording_complete():
 # MAKE OUTBOUND CALL
 # ==================================================
 
-@app.route("/make_call")
+@app.route("/make_call", methods=["GET", "POST"])
 def make_call():
 
     try:
@@ -334,11 +345,7 @@ def make_call():
         })
 
 
-# ==================================================
-# RESET
-# ==================================================
-
-@app.route("/reset")
+@app.route("/reset", methods=["GET", "POST"])
 def reset():
 
     conversation_data["status"] = "Ready"
